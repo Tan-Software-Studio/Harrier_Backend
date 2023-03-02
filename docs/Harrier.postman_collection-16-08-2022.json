@@ -1,0 +1,1454 @@
+{
+	"info": {
+		"_postman_id": "d6eae93e-7a9e-4e2e-bc6a-dea79dd397b5",
+		"name": "Harrier",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14038628"
+	},
+	"item": [
+		{
+			"name": "Encrypt & Decrypt",
+			"item": [
+				{
+					"name": "Decrypt Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "decrypt",
+									"value": "{{ecrypted_response}}",
+									"type": "text"
+								},
+								{
+									"key": "decrypt",
+									"value": "{{message}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "decrypt",
+									"value": "P9G2jv6uoCmmmSnIKnMasM9TKONmy3p8zruWcqsxKoKx7W6W+fPfzKh3FiDBxe54",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/check-encrypt-decrypt",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"check-encrypt-decrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encrypt Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "decrypt",
+									"value": "{{ecrypted_response}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "decrypt",
+									"value": "{{message}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "decrypt",
+									"value": "dXVGrHQfPx9wFmTbwkhBKCMvgCJXau92tVeD/DNBMc8XpPO2VjQ/D1RQZjdr4pT2O3OQKB7B3wGV5gIdFxnL/A==",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/check-encrypt-decrypt",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"check-encrypt-decrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-encrypted-body-param",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "tege@mailinator.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "HLPtmC",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Hello",
+									"type": "text"
+								},
+								{
+									"key": "job_title",
+									"value": "Fullstack developer",
+									"type": "text"
+								},
+								{
+									"key": "employer",
+									"value": "it",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "employer_type",
+									"value": "it",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "time_in_industry",
+									"value": "20-02-2022",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "line_management",
+									"value": "5",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "desired_employer_type",
+									"value": "IT",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "current_region",
+									"value": "indian",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "current country",
+									"value": "india",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "desired_region",
+									"value": "indian",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "desired_country",
+									"value": "india",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "current salary",
+									"value": "30000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "current_bonus_or_commission",
+									"value": "30",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "desired_salary",
+									"value": "90000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "desired_bonus_or_commission",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "notice_period",
+									"value": "9",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "working_arrangements",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "desired_working_arrangements",
+									"value": "1,2,3",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "law_degree",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "qualified_lawyer",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "jurisdiction",
+									"value": "yes",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "pqe",
+									"value": "2022",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "area_of_law",
+									"value": "Litigation",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "legal_experience",
+									"value": "surat",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "customer_type",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "deal_size",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sales_quota",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "legal_tech_tools",
+									"value": "Beginner",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tech_tools",
+									"value": "Luminance",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "qualification",
+									"value": "BCA",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "languages",
+									"value": "telugu, hindi, gujarati, english",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "profile_about",
+									"value": "Laravel backend developer",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "cultural_background",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "first_gen_he",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ethnicity",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "disability",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "disability_specific",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "free_school_meals",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "parents_he",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "school_type",
+									"value": "primary",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "faith",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "community",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "gender_identity",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sexual_orientation",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "visa",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "privacy_policy",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "harrier_search",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "harrier_candidate",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "channel",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "referral",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "is_job_search",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "uuid",
+									"value": "8c883315-e2ff-4089-89c2-1f186328a61e",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/get-encrypted-body-param",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"get-encrypted-body-param"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "api/v1/guest/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "dXVGrHQfPx9wFmTbwkhBKCMvgCJXau92tVeD/DNBMc9n/IVtd03oZps4etbPqPNkdcl7uhJ637hdbva/8Hyd+Q==",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/guest/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"guest",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/admin/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "tege@mailinator.com",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Admin@123",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "api/v1/admin/guest/request/accept",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "dXVGrHQfPx9wFmTbwkhBKCMvgCJXau92tVeD/DNBMc/z8CXHFd5glZHvmpNntznCSSwZyZQ205VAZjSeCNvsRw==",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Shekhar Rudra",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "s94@mailinator.com",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Admin@123",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/guest/request/accept",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"guest",
+								"request",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/admin/details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/details",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/admin/user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "tege@mailinator.com",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Admin@123",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/admin/candidate/list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/candidate/list?page=1&search=",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"candidate",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/admin/candidate/inactive/list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/candidate/inactive/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"candidate",
+								"inactive",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/admin/candidate/details/update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "dXVGrHQfPx9wFmTbwkhBKCMvgCJXau92tVeD/DNBMc9n/IVtd03oZps4etbPqPNkEdoU64oGJk8JctGK+E8cPK54Kf08WKzK/N2Lr/gutmZ7SLiMw23sjbqVqo2fFzf5F/uUmrKweMfHtD+7OB6/MUg5Kx34KIBNAtIB6gUZH4vVOPaWiEsM0AHgE7hv1JhiynThCA9FmeefmHjQsIghFyMSzlWdtjn7djOOOLdn6ueZYkUi06VSYmoYnNV2uCDLdX3rtajbCxkvNDxQzd4afw==",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/candidate/details/update",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"candidate",
+								"details",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Guest Login",
+			"item": [
+				{
+					"name": "api/v1/guest/user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "tege@mailinator.com",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Admin@123",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/guest/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"guest",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/guest/details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/guest/details",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"guest",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/guest/update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "dXVGrHQfPx9wFmTbwkhBKCMvgCJXau92tVeD/DNBMc9n/IVtd03oZps4etbPqPNkEdoU64oGJk8JctGK+E8cPK54Kf08WKzK/N2Lr/gutmZ7SLiMw23sjbqVqo2fFzf5F/uUmrKweMfHtD+7OB6/MUg5Kx34KIBNAtIB6gUZH4vVOPaWiEsM0AHgE7hv1JhiynThCA9FmeefmHjQsIghFyMSzlWdtjn7djOOOLdn6ueZYkUi06VSYmoYnNV2uCDLdX3rtajbCxkvNDxQzd4afw==",
+									"type": "default"
+								},
+								{
+									"key": "cv",
+									"type": "file",
+									"src": "/home/web-dev-02/Documents/resume_001.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/guest/details/update",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"guest",
+								"details",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Emp Login",
+			"item": [
+				{
+					"name": "api/v1/emp/user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "tege@mailinator.com",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Admin@123",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/emp/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emp",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/emp/details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Authentication}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "response",
+									"value": "iSDMSt0oU+HCDZHPtNNLag2gA2O61ILip+wLh9SiiDd6reO3Ehnbe7QRCKSjH3efmWTOcEr7hbgPKbwQ14uyrQ==",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/emp/details",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emp",
+								"details"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "guest/login/request/post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{Authentication}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "response",
+							"value": "dXVGrHQfPx9wFmTbwkhBKCMvgCJXau92tVeD/DNBMc/z8CXHFd5glZHvmpNntznCSSwZyZQ205VAZjSeCNvsRw==",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/guest/login/request/post",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"guest",
+						"login",
+						"request",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guest/form/store",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "response",
+							"value": "+02XLWok1SDEs7xhZhO3i4urMZdIZYU/Y5kG2OXyM2GlHwVoYfym/6RGIhnuwmSZoWBfQ7Om06SA++g5PfJJXTfBgkwfcu1iXS+10P/U1aecmNeZM+lbtgD8TPjVwpOjgt9gcP+HygvWqhFjnE9DUiewQ5C7R9P/ox53ocvtU457uirmq5vI8Gm1RavV6vrepbQiztDSbvLHl8AgDMufFsMPqMM1zwTvEAT9hyDnHm64JXRizcSXpdeyZGZC2uaiWLWTkaP72XMkay4bBJNuaniUR3haQ95y1hQ/tCH6X0Y30bEqR5CHcpC40fayJbldTKG1yJW5caiuRysYoJlm4HBoTNBX6TCfqqMzcrF7qmwLYEIgK83Nkfh9s245M9kwq7dPxU3T3SoBZExuQUzrQhVJhPKx0aU3e0NBtT4kgjPB2anx3mP4T3W6tN9SGLjOg9unjuy5IXBv5U8FI/oxyYL+hN3n0MP/uJYwD28GG2rkyvQ745aCFyIaIQ8yyKVovKukM8mHTMOtc9vx1eVGXEU3MoYG5tnWpmDKSIKnYyS23WoQR1jT6JAVmahPRpVXJMUyhhhsOUw6J4e+oyvuGuJIo67zeugS6jY1ttFdyVkXcLgM0S4tQgT1w+bw3Lou8mTrex6K9DMXZhePBVAP7ilxbPfcwVDS9hAVMmX3aF5N97RAbgJ9yh1vCEJ0Gh1z83In4kUjRK//ZA82kJIXapzVxF5CjefkF9mITCUachnmUsr6J9I+rqluIo65zCkCkfF3Ndzi62T3pJH4qNsr2/r6k0F5ui7iSImk1JUv7u8mtPClVquURiCwtflITrGUy2P4pcwmSjWXx9Z/eB3pzT0+HwmQbt7Av2dJS8R6pesCbQD6iaZJOQTMSw4fSjahYNqemgCoc6OPUJ3wYpzVB+SQfd016IZoBZ461NCQ6ZONe3ritrCFtZzZvUSbeFXehec2KeUh+5d93JR2TzMB0TdNIWPB6O+E6lO6AJ5OySK2Lyq/U3ZHElT4FPmJPY2KUMADGRmOoY/cSs7CEbKbbF+OMQqdTdTexHZMJauCtFnsyiG5+4058wTzZ1sf2ISQxz71NpBmfOIrBbL9mvDLWcbAOpBuscYHE4AhAIh+wczYOKfg9X3ChqvIruA2bv6HMdxlpMpfcvxhVKcS2FE9KUXlf5IWqYIsszEC/67EEOnsnoTWc1M5gu95xJ1CddhlAmSBrxCpgQ+xoKAtw2g0YvgCCpVLVOa932ADV4T3vg0JU4mexxSnLaEhLejmu4mcUzDeFBJjp3UePsXm5FNpr7GQYsCptiF1x62Al9A4NeOAwDS+Xb9jdD7S9R/aJsoV1GZhIyPfXk7dKivNcpuntC9V43wkgvBBHH1HcbKiZvVzu/iD6WCT+Kr78W8yua0W+IcbVOhMumZKtzXUY+2Cch1/dJwFEJoomBGqnM67WOvGhyTfv440T03ijEP6Us7SIbXrdGuFCAnakuBFw1/WYHsXNZt1c6DoUP3eKXPfQ8Jmo8oyHd/pnbXimdjYxPK+OKTJDZoSbomcC127JDaxz08+LniVNRwYEZ17LLiOrAFSqBqR/pnyuk0BkRySNX9UaMd/QjUTC8xN2l6FE23RffaF/nioKjSri73gFH6C4IPyeauQ11EB8xW4uEoTfGZ3",
+							"type": "default"
+						},
+						{
+							"key": "cv",
+							"type": "file",
+							"src": "/home/web-dev-02/Documents/resume_001.pdf"
+						},
+						{
+							"key": "profile_image",
+							"type": "file",
+							"src": "/home/web-dev-02/Documents/QR_1659014349.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/guest/form/store",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"guest",
+						"form",
+						"store"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"if(pm.response.json().code){",
+					"    const message=pm.response.json().message",
+					"    pm.environment.set('message', message)",
+					"",
+					"    const ecrypted_res=pm.response.json().data",
+					"    pm.environment.set('ecrypted_response', ecrypted_res)",
+					"",
+					"    if(pm.response.json().accessToken)",
+					"    {",
+					"        const token=pm.response.json().accessToken",
+					"        pm.environment.set('Authentication',token)",
+					"    }    ",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost"
+		}
+	]
+}
