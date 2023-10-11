@@ -19,6 +19,7 @@ class LoginRequest extends Notification
      */
     public function __construct($data)
     {
+       
         $this->guest = $data;
         $this->afterCommit();
     }
@@ -46,18 +47,16 @@ class LoginRequest extends Notification
         {
             return (new MailMessage)
             ->subject('Guest Access Request')
-            ->line('The introduction to the notification.')
             ->line('Guest access request received.')
-            ->line('Please active email address: '.$this->guest->new_email)
+            ->line('Please activate email address: '.$this->guest->email)
             // ->action('Notification Action', url('/'))
             ->line('Thanks!'); 
 
         }else{        
             return (new MailMessage)
                     ->subject('Guest Access Request')
-                    ->line('The introduction to the notification.')
                     ->line('Guest access request received.')
-                    ->line('Please active email address: '.$this->guest->new_email)
+                    ->line('Please activate email address: '.$this->guest->email)
                     // ->action('Notification Action', url('/'))
                     ->line('Thanks!');
         }

@@ -76,6 +76,11 @@ return [
         'accepted' =>   [ 'value' => 2, 'name' => 'Accepted'],
         'rejected' =>   [ 'value' => 3, 'name' => 'Rejected'],
     ],
+    'interview_request' => [
+        'requested'=>   [ 'value' => 1, 'name' => 'Requested'],
+        'accepted' =>   [ 'value' => 2, 'name' => 'Accepted'],
+        'rejected' =>   [ 'value' => 3, 'name' => 'Rejected'],
+    ],
     
     /* 
         -candidates => status , 
@@ -106,6 +111,8 @@ return [
         'cv_acc'       => [ "key" => "cv_accepted", "title" => "CV Accepted", "message" => "CV Accepted" ],
         'cv_rej'       => [ "key" => "cv_rejected", "title" => "CV Rejected", "message" => "CV Rejected" ],
         'cv_update'       => [ "key" => "cv_updated", "title" => "CV Updated", "message" => "Candidate Profile Updated" ],
+        'interview_req'       => [ "key" => "interview_requested", "title" => "Interview Requested", "message" => "Interview Requested" ],
+        'interview_acc'       => [ "key" => "interview_accepted", "title" => "Interview Accepted", "message" => "Interview Accepted" ],
     ],
 
     'types' => [

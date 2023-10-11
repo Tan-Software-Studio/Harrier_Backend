@@ -35,14 +35,18 @@ class EmpCandidateController extends Controller
                 if($emp_candidate)
                 {
                     $emp_candidate->delete();
+                    DB::commit();
+                    return sendDataHelper('Short list remove done.', [], ok());
                 }else{
                     $in = new EmpCandidate();
                     $in->c_uuid = $candidate_uuid;
                     $in->emp_uuid = $emp_uuid;
                     $in->save();
+                    DB::commit();
+                    return sendDataHelper('Short list added done.', [], ok());
                 }
-                DB::commit();
-                return sendDataHelper('Short list added done.', [], ok());
+                
+               
             }
         } catch (\Throwable $th) {
             DB::rollBack();

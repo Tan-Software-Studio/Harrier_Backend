@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
+     
         try {
+            
             $data = [
                'employers_count' =>  DB::table('employers')->whereNull('deleted_at')->count(),
                'candidates_count' =>  DB::table('candidates')->whereNull('deleted_at')->count(),
@@ -20,6 +22,7 @@ class DashboardController extends Controller
                'today_guests_request_count' =>  DB::table('users')->whereDate('updated_at', \Carbon\Carbon::today())->where('role', roleGuest())->where("is_request", active())->where("status", inactive())->count(),
                'today_candidate_profile_count' =>  DB::table('candidates')->whereDate('created_at', \Carbon\Carbon::today())->count()
             ];
+            
             return sendDataHelper("List", $data, ok());
         } catch (\Throwable $th) {
             $bug = $th->getMessage();

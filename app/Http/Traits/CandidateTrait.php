@@ -65,7 +65,7 @@ trait CandidateTrait {
 
             if ($data->fails()) {
 
-                $errors_data = [
+                $errors_data = [ 
                    'errors' => $data->messages()->getMessages()
                 ];
                 return sendError($data->errors()->first(), $errors_data, errorValid());
@@ -327,7 +327,6 @@ trait CandidateTrait {
             return sendErrorHelper('Error', $bug, error());
         }
     }
-
     public function formStore(Request $request)
     {
         DB::beginTransaction();
@@ -382,24 +381,20 @@ trait CandidateTrait {
                 if ($data->fails()) {
                     return sendError($data->errors()->first(), [], errorValid());
                 }
-
                 $in = new Candidate();
-
                 if(@$request->time_in_current_role)
                 {
                     $in->time_in_current_role = date('Y-m-d', strtotime(@$request->time_in_current_role));
                 }else{
                     $in->time_in_current_role = null;
                 }
-
                 if(@$request->time_in_industry)
                 {
                     $in->time_in_industry = date('Y-m-d', strtotime(@$request->time_in_industry));
                 }else{
                     $in->time_in_industry = null;
                 }
-                
-                $in->uuid = Str::uuid()->toString();
+                $in->uuid = @$request->uuid ? @$request->uuid : Str::uuid()->toString() ;
                 $in->name = @$request->name;
                 $in->first_name  = @$request->first_name;
                 $in->last_name = @$request->last_name;
@@ -590,7 +585,6 @@ trait CandidateTrait {
     
     public function candDetailsUpdate(Request $request) /* Candidate deatils update */
     {
-        
         DB::beginTransaction();
         $req = $request;
         try {
@@ -830,7 +824,7 @@ trait CandidateTrait {
                 $in->privacy_policy = @$request->privacy_policy;
                 $in->harrier_search = @$request->harrier_search;
 
-                if(@$request->harrier_candidate) {  $in->harrier_candidate = @$request->harrier_candidate;  }
+                $in->harrier_candidate = @$request->harrier_candidate;  
                 if(@$request->channel)
                 {
                     $in->channel = @$request->channel;
