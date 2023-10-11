@@ -49,6 +49,7 @@ class AdminEmployerController extends Controller
     /* Get All employers list */
     public function allEmployersList(Request $request)
     {   
+       
         try {
             $query = Employer::query();
             $query->orderBy('created_at', 'Desc');

@@ -8,6 +8,7 @@ use App\Models\Candidate\CandDesiredEmployerTypes;
 use App\Models\Candidate\CandLegalTechTools;
 use App\Models\Candidate\CandMstCulturalBackground;
 use App\Models\Candidate\CandMstCustomerTypes;
+use App\Models\Candidate\CandMstLanguage;
 use App\Models\Candidate\CandQualifications;
 use App\Models\Candidate\CandTechTools;
 use App\Models\Candidate\CandWorkingArrangements;
@@ -19,6 +20,7 @@ use App\Models\Master\MstCulturalBackground;
 use App\Models\Master\MstCurrency;
 use App\Models\Master\MstCustomerType;
 use App\Models\Master\MstEmployerType;
+use App\Models\Master\MstLanguage;
 use App\Models\Master\MstRegion;
 use App\Models\Master\MstWorkingArrangements;
 use App\Models\Unique\Country;
@@ -30,14 +32,34 @@ trait CandidateFilterTrait {
      /* Get Candidates list */
     public function candidatesList($request, $role)
     {   
+       
          $req = $request;
          try {
+            
             if(respValid($request)) { return respValid($request); }  /* response required validation */
             $request = decryptData($request['response']); /* Dectrypt  **/
             $request = (object) $request;   // count show to comment in filter count
-            
+            $search = @$request->search;
             $query = Candidate::query();
-            
+            // dd($search);
+           if(!empty($search)){
+          
+                $query->where(function ($query) use ($search) {
+                    $query->where('id', 'like', "%$search%")
+                        ->orWhere('job_title','like', "%$search%")
+                        ->orWhere('time_in_current_role','like', "%$search%")
+                        ->orWhere('time_in_industry','like', "%$search%")
+                        ->orWhere('desired_salary','like', "%$search%")
+                        ->orWhere('desired_bonus_or_commission','like', "%$search%");       
+                });
+                // $response = $query->paginate(
+                //     $perPage = 10, $columns = ['*'], $pageName = 'page'
+                // );
+               
+                // return sendDataHelper("List", $response, ok());
+               
+            }
+           
             $query->with('desired_employer_types.desired_employer_types_view');
             
             if($role == roleGuest() || $role ==  roleEmp())
@@ -140,7 +162,7 @@ trait CandidateFilterTrait {
 
                             
                             if(@$loop->first_option == "desired_salary" && $loop->currency)
-                            {   
+                            {  
                                 if($search)
                                 {
                                     if($loop->filter_type == 'is_more_than')
@@ -906,16 +928,17 @@ trait CandidateFilterTrait {
                                 {
                                     if($loop->filter_type == 'is_more_than')
                                     {
-                                        $query->where('if(@$loop->first_option == "pqe")', '>', $search);
+                                        $query->where('pqe', '>', $search);
                                     }
+                                    // dd('bipin');
                                     if($loop->filter_type == 'is_less_than')
                                     {
-                                        $query->where('if(@$loop->first_option == "pqe")', '<', $search);
+                                        $query->where('pqe', '<', $search);
                                     }
                                     if($loop->filter_type == 'is_between')
                                     {
-                                        $query->where('if(@$loop->first_option == "pqe")', '>=', $search);
-                                        $query->where('if(@$loop->first_option == "pqe")', '<=', $search_two);
+                                        $query->where('pqe', '>=', $search);
+                                        $query->where('pqe', '<=', $search_two);
                                     }
                                 }
                             }
@@ -1059,6 +1082,35 @@ trait CandidateFilterTrait {
                                     }
                                 }
                             }
+                            if(@$loop->first_option == "languages")
+                            {   
+                                if($search)
+                                {
+                                    // dd('bipin');
+                                    if($loop->filter_type == 'is')
+                                    {
+                                        $mst_ids = MstLanguage::where('title', $search)->pluck('id');
+                                        $dataIds =  CandMstLanguage::whereIn('mst_id', $mst_ids)->pluck('c_uuid');
+                                        if(count($dataIds) > 0)
+                                        {
+                                            $query->whereIn('uuid', $dataIds);
+                                        }else{
+                                            $query->whereIn('uuid', []);
+                                        }
+                                    }
+                                    if($loop->filter_type == 'is_not')
+                                    {
+                                        $mst_ids = MstLanguage::where('title', $search)->pluck('id');
+                                        $dataIds =  CandMstLanguage::whereIn('mst_id', $mst_ids)->pluck('c_uuid');
+                                        if(count($dataIds) > 0)
+                                        {
+                                            $query->whereNotIn('uuid', $dataIds);
+                                        }
+                                    }
+                                    
+                                }
+                            }
+
                         }
                     }
                 }
@@ -1075,14 +1127,14 @@ trait CandidateFilterTrait {
                 case roleAdmin():
                     break;
                 case roleGuest():
-                    $query->select('id','uuid', 
+                     $query->select('id','uuid', 
                     'job_title', 'employer_type', 
                     'time_in_current_role', 'time_in_industry',
                     'desired_employer_type',
                     'line_management', 'notice_period', 
                     'desired_salary', 'desired_bonus_or_commission', 'desired_salary_symbol', 'desired_bonus_or_commission_symbol', 
                     'current_salary', 'current_salary_symbol', 'current_bonus_or_commission', 'current_bonus_or_commission_symbol', 
-                    'current_country', 'desired_country', 'current_region',
+                    'current_country', 'desired_country', 'current_region','desired_region',
                     'freelance_current', 'freelance_future', 'freelance_daily_rate as day_rate', 'freelance_daily_rate_symbol',
                     'working_arrangements', 'desired_working_arrangements', 
                     'law_degree', 'qualified_lawyer', 'jurisdiction', 'pqe', 'area_of_law',
@@ -1092,14 +1144,14 @@ trait CandidateFilterTrait {
                     );
                     break;
                 case roleEmp():
-                    $query->select('id','uuid',
+                   $query->select('id','uuid',
                     'job_title', 'employer_type', 
                     'time_in_current_role', 'time_in_industry',
                     'status',  'desired_employer_type',
                     'line_management', 'notice_period', 
                     'desired_salary', 'desired_bonus_or_commission', 'desired_salary_symbol', 'desired_bonus_or_commission_symbol', 
                     'current_salary', 'current_salary_symbol', 'current_bonus_or_commission', 'current_bonus_or_commission_symbol', 
-                    'current_country', 'desired_country', 'current_region',
+                    'current_country', 'desired_country', 'current_region','desired_region',
                     'freelance_current', 'freelance_future', 'freelance_daily_rate as day_rate', 'freelance_daily_rate_symbol',
                     'working_arrangements', 'desired_working_arrangements', 
                     'law_degree', 'qualified_lawyer', 'jurisdiction', 'pqe', 'area_of_law',
@@ -1109,6 +1161,7 @@ trait CandidateFilterTrait {
                     );
                     $query->with(['is_cv_list_same_emp'  => function ($query) {
                             return $query->select('id','job_id', 'c_uid', 'is_cv');
+                           
                         }
                     ]);
                     
@@ -1124,9 +1177,9 @@ trait CandidateFilterTrait {
                     break;
             }
             $response = $query->paginate(
-                $perPage = 10, $columns = ['*'], $pageName = 'page'
-            );
- 
+                    $perPage = 10, $columns = ['*'], $pageName = 'page'
+                );
+           
             return sendDataHelper("List", $response, ok());
              
         } catch (\Throwable $th) {
@@ -1136,7 +1189,7 @@ trait CandidateFilterTrait {
         }    
          
     }
-    
+     
     public function candidatesShortList($request, $role)
     {   
          $req = $request;

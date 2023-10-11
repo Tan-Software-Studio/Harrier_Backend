@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth:api', 'emp'] , 'prefix' => 'v1/emp', 'as'=>
 
     Route::post('cv/request/post', [EmployerController::class, 'cvReqPost']);  /*Candidate CV reuqested */
     Route::post('requested/cv/list', [CVController::class, 'cvReqListEmpGet']); /*Candidate CV requested list */ 
+    Route::post('interview/request', [CVController::class, 'interviewReq']); /*Candidate Interview requested */ 
     
 
     //User All Notification

@@ -129,8 +129,15 @@ class ATSController extends Controller
                     $in->offer_bonus_commission_symbol = @$request->offer_bonus_commission_symbol;  
                 }
 
-                if(@$request->interview_request == 1 || @$request->interview_request == 0)  {
-                    $in->interview_request = @$request->interview_request;
+                if(@$request->interview_request == 1 || @$request->interview_request == 2 || @$request->interview_request == 3)  {
+                    if(@$request->c_job_status == 10){
+                        $in->interview_request = 2;
+                    }else if(@$request->c_job_status == 11){
+                        $in->interview_request = 3;
+                    }
+                    else{
+                        $in->interview_request = @$request->interview_request;
+                    }
                 }
                 
                 if(@$request->interview_request_date)   {

@@ -17,9 +17,12 @@ class OfficeLocationController extends Controller
      */
     public function index(Request $request, $tblname)
     {
+        // dd($tblname);
         try {
             $emp_uuid = employer(auth()->user()->email)->uuid;
+            // dd($emp_uuid);
             $results = DB::table($tblname)->where('emp_uuid', $emp_uuid)->get();
+            // dd($results);
             return sendDataHelper('List.', $results, ok());
         } catch (\Throwable $th) {
             return sendErrorHelper('Error', $th->getMessage(), error());

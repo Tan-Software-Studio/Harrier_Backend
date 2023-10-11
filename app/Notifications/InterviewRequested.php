@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ForgotPasswordLink extends Notification
+class InterviewRequested extends Notification
 {
     use Queueable;
 
@@ -18,7 +18,8 @@ class ForgotPasswordLink extends Notification
      */
     public function __construct($data)
     {
-        $this->data = (object) $data;
+        // dd($data);
+        $this->data = $data;
         $this->afterCommit();
     }
 
@@ -30,7 +31,7 @@ class ForgotPasswordLink extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -42,10 +43,22 @@ class ForgotPasswordLink extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You are receiving this email because we received a password reset request for your account.')
-                    ->action('Reset Password', $this->data->token)
-                    ->line('If you did not request a password reset, no further action is required.')
-                    ->line('Thank you for using our application!');
+                   
+                    ->line('Hello!')
+                     ->line('Interview requested candidate('.$this->data->cand_email.' Name :'.$this->data->cand_name.' Candidate No.:'.$this->data->cand_id.').')
+                    ->line('The employer '.env('APP_NAME').' has made an Interview request for the role '.$this->data->job_name.'.')
+                    // ->action('Notification Action', url('/'))
+                    ->line('User requesting the interview : '.$this->data->user_name.'.')
+                    ->line('Thank you for using our platform!');
+    }
+    
+    public function toDatabase($notifiable)
+    {
+        return [
+            'type' => $this->data->type,
+            'email' => $this->data->email,
+            'message' => $this->data->message,
+        ];
     }
 
     /**
