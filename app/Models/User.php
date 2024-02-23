@@ -107,4 +107,8 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function guestMaster() {
+        return $this->hasOne(GuestMater::class, 'email', 'email');
+    }
 }

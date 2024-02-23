@@ -18,6 +18,7 @@ class CVRequested extends Notification
      */
     public function __construct($data)
     {
+        // dd($data);
         $this->data = $data;
         $this->afterCommit();
     }
@@ -42,10 +43,11 @@ class CVRequested extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->line('Candidate CV Requested ('.$this->data->cand_email.' Name :'.$this->data->cand_name.').')
-                    ->line('The employer ('.$this->data->emp_email.') CV requested for this job '.$this->data->job_name.'.')
+                   
+                    ->line('Candidate CV Requested ('.$this->data->cand_email.' Name :'.$this->data->cand_name.' Candidate No.:'.$this->data->cand_id.').')
+                    ->line('The employer '.env('APP_NAME').' CV requested for this job '.$this->data->job_name.'.')
                     // ->action('Notification Action', url('/'))
+                    ->line('The user : '.$this->data->user_name.'.')
                     ->line('Thank you for using our application!');
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class PassportAuthController extends Controller
+class   PassportAuthController extends Controller
 {
     // date('d-m-Y H:i:s', strtotime("-2 minutes"));
     // date('d-m-Y H:i:s', strtotime("+2 minutes"));
@@ -21,13 +21,13 @@ class PassportAuthController extends Controller
     public function login(Request $request)
     {
         try {
+           
             if(respValid($request)) { return respValid($request); }  /* response required validation */
             $request = decryptData($request['response']); /* Dectrypt  **/
             $data = Validator::make($request, [
                 'email' => 'required|email|exists:users,email',
                 'password' => 'required'
             ]);
-
             if ($data->fails()) {
                 return sendError($data->errors()->first(), [], errorValid());
             }else{
@@ -40,13 +40,15 @@ class PassportAuthController extends Controller
                 ];
                 
                 if (auth()->attempt($credential)) {
-                        
+                    
                     if(auth()->user()->isAdmin())
                     {
+                        $users = User::find(auth()->user()->id);
+                        // dd($users);
                         // auth()->user()->tokens->each(function($token, $key) {
                         //     $token->delete();
                         // });
-                        $token = auth()->user()->createToken('Admin Token',  [roleAdmin()])->accessToken;
+                        $token = $users->createToken('Admin Token',  [roleAdmin()])->accessToken;
                         
                         $response = [
                             'access_token' => $token
@@ -65,7 +67,9 @@ class PassportAuthController extends Controller
 
     /*  Guest Login Candidate  */
     public function guestLogin(Request $request)
+        
     {
+        
        return $this->loginUser($request, roleGuest());
     }
 
@@ -79,8 +83,10 @@ class PassportAuthController extends Controller
     public static function loginUser($request, $role)
     {
         try {
-            if(respValid($request)) { return respValid($request); }  /* response required validation */
+         
+            if(respValid($request)) {return respValid($request); }  /* response required validation */
             $request = decryptData($request['response']); /* Dectrypt  **/
+            
             $data = Validator::make($request, [
                 'email' => 'required|exists:users,email|'.Rule::exists('users')->where(function ($query, $role) {
                     return $query->where('role', $role);
@@ -93,8 +99,10 @@ class PassportAuthController extends Controller
             ]);
 
             if ($data->fails()) {
+               
                 return sendError($data->errors()->first(), [], errorValid());
             }else{
+                
                 $request = (object) $request;        
                 $passwordGenerate  = Str::random(6);
                 
@@ -104,16 +112,22 @@ class PassportAuthController extends Controller
                 ];
                 
                 $userLog = User::where('email', $request->email)->where('role', $role)->first();
+
+
+                // dd($userLog);
                 if($userLog)
                 {
+                    
                     if($role === roleGuest() && $userLog->is_request != login_active())
                     {
                         return sendError('Account not activated. Please request guest access.', [], error());       
                     }elseif ($role === roleEmp() && $userLog->status != active()) {
+                        
                         return sendError('Your Account has been deactivated. Contact to Harrier.', [], error());   
                     }
                 }
                 if ($userLog && auth()->attempt($credential)) {
+                    // dd($request);
                     if(auth()->user()->role == $role)
                     {
                         if($role === roleEmp()) {   $actEmp = auth()->user()->isActive();   }
@@ -139,7 +153,8 @@ class PassportAuthController extends Controller
                         $token = auth()->user()->createToken($role.' Token',  [$role, $is_pe])->accessToken;
 
                         $response = [
-                            'access_token' => $token
+                            'access_token' => $token,
+                            // 'email' => $request->email
                         ];
                         return sendDataHelper('Login success.', $response, ok());
                     }

@@ -65,7 +65,7 @@ trait CandidateTrait {
 
             if ($data->fails()) {
 
-                $errors_data = [
+                $errors_data = [ 
                    'errors' => $data->messages()->getMessages()
                 ];
                 return sendError($data->errors()->first(), $errors_data, errorValid());
@@ -327,7 +327,6 @@ trait CandidateTrait {
             return sendErrorHelper('Error', $bug, error());
         }
     }
-
     public function formStore(Request $request)
     {
         DB::beginTransaction();
@@ -382,24 +381,20 @@ trait CandidateTrait {
                 if ($data->fails()) {
                     return sendError($data->errors()->first(), [], errorValid());
                 }
-
                 $in = new Candidate();
-
                 if(@$request->time_in_current_role)
                 {
                     $in->time_in_current_role = date('Y-m-d', strtotime(@$request->time_in_current_role));
                 }else{
                     $in->time_in_current_role = null;
                 }
-
                 if(@$request->time_in_industry)
                 {
                     $in->time_in_industry = date('Y-m-d', strtotime(@$request->time_in_industry));
                 }else{
                     $in->time_in_industry = null;
                 }
-                
-                $in->uuid = Str::uuid()->toString();
+                $in->uuid = @$request->uuid ? @$request->uuid : Str::uuid()->toString() ;
                 $in->name = @$request->name;
                 $in->first_name  = @$request->first_name;
                 $in->last_name = @$request->last_name;
@@ -587,10 +582,202 @@ trait CandidateTrait {
             return sendErrorHelper('Error', $bug, error());
         }
     }
+    public function newFormStore(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            
+            
+            // $data = Validator::make($request->all(), [
+                //     'cv'=> 'required|mimes:pdf,doc,docx|max:10000',
+                // ]);
+                
+                // if ($data->fails()) {
+                    //     return sendError($data->errors()->first(), [], errorValid());
+                    // }
+                    $cv_upload = null;                                                                              
+                    $profile_upload = null;
+                    if ($request->hasFile('cv'))    {   $cv_upload = $request->cv;  }
+                    // if(respValid($request)) { return respValid($request); }  /* response required validation */
+                    $request = decryptData($request['response']); /* Dectrypt  **/
+                    // dd($request);
+                $request = (object) $request;
+                
+                $in = new Candidate();
+                if(@$request->time_in_current_role) 
+                {
+                    $in->time_in_current_role = date('Y-m-d', strtotime(@$request->time_in_current_role));
+                }else{
+                    $in->time_in_current_role = null;
+                }
+                if(@$request->time_in_industry)
+                {
+                    $in->time_in_industry = date('Y-m-d', strtotime(@$request->time_in_industry));
+                }else{
+                    $in->time_in_industry = null;
+                }
+                $in->uuid = @$request->uuid;
+                $in->first_name  = @$request->first_name;
+                $in->last_name = @$request->last_name;
+                $in->phone = @$request->phone;
+                $in->email = @$request->email;
+                $in->status = 1;
+                $in->job_title = @$request->job_title;
+                $in->employer = @$request->employer;
+                if(@$request->employer_type)
+                {
+                    $in->employer_type = @$request->employer_type;
+                }
+
+                if(@$request->line_management)
+                {
+                    $in->line_management = @$request->line_management ?? 0;
+                }
+
+                $in->desired_employer_type = @$request->desired_employer_type;
+                if(@$request->current_region)   { $in->current_region = @$request->current_region;  }
+                if(@$request->current_country) {    $in->current_country = @$request->current_country;  }
+                $in->desired_region = @$request->desired_region;
+                $in->desired_country = @$request->desired_country;
+
+                $in->current_salary = (@$request->current_salary ? @$request->current_salary : 0);
+                if(@$request->current_salary_symbol)
+                {
+                    $in->current_salary_symbol = @$request->current_salary_symbol;
+                }
+                $in->current_bonus_or_commission = (@$request->current_bonus_or_commission ? @$request->current_bonus_or_commission : 0);
+                $in->current_bonus_or_commission_symbol = (@$request->current_bonus_or_commission_symbol ? @$request->current_bonus_or_commission_symbol : null);
+                if(@$request->desired_salary_symbol)
+                {
+                    $in->desired_salary_symbol  = @$request->desired_salary_symbol;
+                }
+
+
+                $in->desired_salary = (@$request->desired_salary ? @$request->desired_salary : 0);
+                if(@$request->desired_bonus_or_commission_symbol)
+                {
+                    $in->desired_bonus_or_commission_symbol = @$request->desired_bonus_or_commission_symbol;
+                }
+
+                $in->desired_bonus_or_commission = (@$request->desired_bonus_or_commission ? @$request->desired_bonus_or_commission : 0);
+                
+                if(@$request->desired_bonus_or_commission_symbol)
+                {
+                    $in->desired_bonus_or_commission_symbol = @$request->desired_bonus_or_commission_symbol;
+                }
+
+                if(@$request->notice_period != null)
+                {
+                    $in->notice_period = @$request->notice_period;
+                }else{
+                    $in->notice_period = null;
+                }
+                if(@$request->working_arrangements) {   $in->working_arrangements = @$request->working_arrangements; }
+                $in->desired_working_arrangements = @$request->desired_working_arrangements;
+                
+                if(@$request->law_degree)
+                {
+                    if(@$request->law_degree == 1 || @$request->law_degree == 0)    {   $in->law_degree = @$request->law_degree;  }
+                }
+
+                if(@$request->qualified_lawyer){
+                    if(@$request->qualified_lawyer == 1 || @$request->qualified_lawyer == 0)    {   $in->qualified_lawyer = @$request->qualified_lawyer;  }
+
+                }
+
+                $in->jurisdiction =@$request->jurisdiction;
+                $in->pqe =@$request->pqe;
+                $in->area_of_law = @$request->area_of_law;
+                $in->legal_experience =@$request->legal_experience;
+                $in->customer_type =@$request->customer_type;
+                
+                $in->deal_size =@$request->deal_size;
+                if(@$request->deal_size_symbol)
+                {
+                    $in->deal_size_symbol =@$request->deal_size_symbol;
+                }
+                
+                $in->sales_quota =@$request->sales_quota;
+                if(@$request->sales_quota_symbol)
+                {
+                    $in->sales_quota_symbol = @$request->sales_quota_symbol;
+                }
+
+                $in->legal_tech_tools =@$request->legal_tech_tools;
+                $in->tech_tools =@$request->tech_tools;
+                $in->qualification =@$request->qualification;
+                $in->languages =@$request->languages;
+                $in->profile_about =@$request->profile_about;
+                $in->harrier_search =@$request->harrier_search;
+                $in->harrier_candidate =@$request->harrier_candidate;
+                if(@$request->freelance_current)
+                {
+                    if(@$request->freelance_current == 1 || @$request->freelance_current == 0) { $in->freelance_current = @$request->freelance_current; }
+                }
+                if(@$request->freelance_future)
+                {
+                    if(@$request->freelance_future == 1 || @$request->freelance_future == 0)
+                    {
+                        $in->freelance_future = @$request->freelance_future;
+                    }
+                }
+                if(@$request->legaltech_vendor_or_consultancy)
+                {
+                    if(@$request->legaltech_vendor_or_consultancy == 1 || @$request->legaltech_vendor_or_consultancy == 0)
+                    {
+                        $in->legaltech_vendor_or_consultancy = @$request->legaltech_vendor_or_consultancy;
+                    }    
+                }
+                
+                $in->freelance_daily_rate = @$request->freelance_daily_rate;
+                if(@$request->freelance_daily_rate_symbol)
+                {
+                    $in->freelance_daily_rate_symbol = @$request->freelance_daily_rate_symbol;
+                }
+                if($cv_upload)  {    $in->cv = uploadFile($cv_upload, 'uploads/cv') ?? null;    }
+                // if($profile_upload) {   $in->profile_image = uploadFile($profile_upload, 'uploads/profile') ?? null;    }
+                
+                $in->save(); 
+
+                if($in)
+                {
+                    if(@$request->desired_employer_type)
+                    {
+                        $this->updateAndCreateDesiredEmployerTypes($in->uuid, @$request->desired_employer_type);
+                    }
+                    $this->multipleSelectUpsertTitle('cand_legal_tech_tools', $in->uuid, @$request->legal_tech_tools);
+                    $this->multipleSelectUpsertTitle('cand_tech_tools', $in->uuid, @$request->tech_tools);
+                    $this->multipleSelectUpsertTitle('cand_qualifications', $in->uuid, @$request->qualification);
+                    $this->multipleSelectUpsertId('cand_working_arrangements', $in->uuid, @$request->desired_working_arrangements);
+                    $this->multipleSelectUpsertId('cand_desired_countries', $in->uuid, @$request->desired_country);
+                    $this->multipleSelectUpsertId('cand_mst_customer_types', $in->uuid, @$request->customer_type);
+                    $this->multipleSelectUpsertId('cand_mst_languages', $in->uuid, @$request->languages);
+                    
+                }
+                $response = [
+                    'details' => $in
+                ];
+                $in->makeHidden('uuid', 'id')->toArray();
+                if ($response) {
+                    DB::commit();
+                    return sendDataHelper('Thank you for create your candidate profile. we will email contact you shortly.', $response, ok());
+                } else {
+                    DB::rollBack();
+                    return sendError('Something went wrong', [], unAuth());
+                }
+            // }
+        } catch (\Throwable $th) {
+            // throw $th;
+            DB::rollBack();
+            $bug = $th->getMessage();
+            return sendErrorHelper('Error', $bug, error());
+        }
+    }
+
+    
     
     public function candDetailsUpdate(Request $request) /* Candidate deatils update */
     {
-        
         DB::beginTransaction();
         $req = $request;
         try {
@@ -830,7 +1017,7 @@ trait CandidateTrait {
                 $in->privacy_policy = @$request->privacy_policy;
                 $in->harrier_search = @$request->harrier_search;
 
-                if(@$request->harrier_candidate) {  $in->harrier_candidate = @$request->harrier_candidate;  }
+                $in->harrier_candidate = @$request->harrier_candidate;  
                 if(@$request->channel)
                 {
                     $in->channel = @$request->channel;

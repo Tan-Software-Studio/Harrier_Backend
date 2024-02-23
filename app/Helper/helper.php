@@ -71,6 +71,11 @@ function login_requested()	{ 	return config('constants.login_request.requested.v
 function login_expired() 	{ 	return config('constants.login_request.expired.value'); 	}
 function login_active()	{	return config('constants.login_request.active.value');	}
 
+/* interview_request ---------------------*/
+function is_Interview_requested()	{ 	return config('constants.interview_request.requested.value');	}
+function is_Interview_accepted()	{ 	return config('constants.interview_request.accepted.value');	}
+function is_Interview_rejected()	{ 	return config('constants.interview_request.rejected.value');	}
+
 function role_name($role)
 {
 	switch ($role) {

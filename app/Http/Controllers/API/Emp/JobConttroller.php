@@ -101,6 +101,7 @@ class JobConttroller extends Controller
     /* Jobs Names */
     public function liveJobNames(Request $request)
     {
+        
         try {
             if(respValid($request)) { return respValid($request); }  /* response required validation */
             $request = decryptData($request['response']); /* Dectrypt  **/

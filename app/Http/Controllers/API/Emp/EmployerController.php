@@ -51,6 +51,7 @@ class EmployerController extends Controller
 
                 if($admin = adminTable())
                 {
+                    $user = User::where('role', roleAdmin())->first();
                     $cand = Candidate::where('uuid', $in->c_uid)->first();
                     $job = Job::find($in->job_id);
                     $emp = employer_uuid($job->emp_uid);
@@ -60,17 +61,19 @@ class EmployerController extends Controller
                             'type' => config('constants.notification_type.cv_req.key'),
                             'email' => $emp->email,
                             'message' => config('constants.notification_type.cv_req.message'). ' for Candidate Id #'. $cand->id,
+                            'cand_id' => $cand->id,
                             'cand_email' => $cand->email,
                             'cand_name' => $cand->first_name.' '.$cand->last_name,
                             'job_name' => $job->job_title,
-                            'emp_email' => $emp->email
+                            'emp_email' => $emp->email,
+                            'user_name' => $user->name,
                         ];
                         $data = (object) $data;
 
                                                 
                         $admin['email'] = env('CV_REQUEST_RECIEVE_MAIL');
                         $admin->notify(new CVRequested($data));
-                        $emp->notify(new CVRequestSendYou($data));
+                        // $emp->notify(new CVRequestSendYou($data));
                         
                     }
                 }
