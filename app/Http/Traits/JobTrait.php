@@ -6,12 +6,15 @@ use App\Models\Emp\EmpOfficeLocation;
 use App\Models\Emp\EmpWorkingSchedule;
 use App\Models\Emp\JobOfficeLocation;
 use App\Models\Emp\JobWorkingSchedule;
+use App\Models\Employer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Job;
 use App\Models\JobCondidate;
+use App\Notifications\JobEmployeRequestCV;
 use App\Notifications\JobInterestCandidate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 trait JobTrait {
@@ -137,7 +140,14 @@ trait JobTrait {
                 }
                 
                 // return $in;
-                $in->save();  
+                $in->save();
+                $vv = Employer::where('uuid',$in->emp_uid)->first();
+                $datas = [
+                    'name' => Auth::user()->name,
+                    'job_title' =>  @$request->job_title,   
+                ];  
+                // dd($inn);
+                $vv->notify(new JobEmployeRequestCV($datas));
                 if($in && @$request->office_location)
                 {
                     $this->updateAndCreateWorkingSchedule($in->id, @$request->working_schedule);
@@ -147,8 +157,8 @@ trait JobTrait {
                 {
                     $this->updateAndCreateOfficeLocation($in->id, @$request->office_location);
                 }
-
                 DB::commit();
+                
                 return sendDataHelper(trans('msg.details_saved'), [], ok());
             }
         } catch (\Throwable $th) {

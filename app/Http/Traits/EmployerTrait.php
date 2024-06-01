@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Job;
+use App\Notifications\EmpolyerStatusChangeEmail;
 use App\Notifications\RequestAccept;
 
 trait EmployerTrait {
@@ -43,7 +44,7 @@ trait EmployerTrait {
 
     public function mailsendLoginAccept($in)
     {
-        $in->notify(new RequestAccept($in));
+        $in->notify(new EmpolyerStatusChangeEmail($in));
     }
 
 }

@@ -43,19 +43,22 @@ class CVRequested extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                   
-                    ->line('Candidate CV Requested ('.$this->data->cand_email.' Name :'.$this->data->cand_name.' Candidate No.:'.$this->data->cand_id.').')
-                    ->line('The employer '.env('APP_NAME').' CV requested for this job '.$this->data->job_name.'.')
-                    // ->action('Notification Action', url('/'))
-                    ->line('The user : '.$this->data->user_name.'.')
-                    ->line('Thank you for using our application!');
+            ->greeting(' ')
+            ->subject('CV Request alert')
+            ->line('Candidate CV Requested (' . $this->data->cand_email . ' Name :' . $this->data->cand_name . ' Candidate :' . $this->data->cand_id . ').')
+            ->line('Employer ' . $this->data->emp_name . ' CV requested for this job ' . $this->data->job_name . '.')
+            // ->action('Notification Action', url('/'))
+            ->line('The user : ' . $this->data->user_name . '.')
+            ->line('Kind regards,')
+            ->salutation('Harrier Candidates');
+            // ->line('Thank you for using our application!');
     }
 
     public function toDatabase($notifiable)
     {
         return [
             'type' => $this->data->type,
-            'email' => $this->data->email,
+            'email' =>  env('CONTACT_MAIL'),
             'message' => $this->data->message,
         ];
     }
