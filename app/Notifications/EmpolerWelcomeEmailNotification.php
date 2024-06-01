@@ -2,12 +2,13 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ForgotPasswordLink extends Notification
+class EmpolerWelcomeEmailNotification extends Notification
 {
     use Queueable;
 
@@ -18,7 +19,8 @@ class ForgotPasswordLink extends Notification
      */
     public function __construct($data)
     {
-        $this->data = (object) $data;
+       
+        $this->data = $data;
         $this->afterCommit();
     }
 
@@ -30,7 +32,7 @@ class ForgotPasswordLink extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -41,16 +43,25 @@ class ForgotPasswordLink extends Notification
      */
     public function toMail($notifiable)
     {
+       
+            return (new MailMessage)
+			->greeting(' ')
+            ->subject('Employer Sign Up')
+            ->line('Thank you for signing up to Harrier Candidates. We will send Commercial Terms to your Invoice Contact and login details will be provided to you.')
+			->line('Kind regards,')
+			->salutation('Harrier Candidates');
+            
+         
 
-        return (new MailMessage)
-        ->subject('Password Reset')
-        
-        ->line('You are receiving this email because we received a password reset request for your account.')
-        ->action('Reset Password', $this->data->token)
-        ->line('if you did not request a password reset, no further action is required.')
-        ->line('Thank you for using our application!')
-        ->line('Regards,')
-        ->salutation('Harrier Candidates');
+       
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'email' => $this->data,
+            'type' => config('constants.notification_type.employsignup_welcome_log.key')
+        ];
     }
 
     /**

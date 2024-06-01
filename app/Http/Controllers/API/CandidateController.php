@@ -11,6 +11,7 @@ use App\Models\Candidate;
 use App\Models\Candidate\CandDesiredEmployerTypes;
 use App\Models\GuestMater;
 use App\Models\Master\MstEmployerType;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,7 @@ class CandidateController extends Controller
     {
         return self::candidatesList($request, auth()->user()->role);
     }
+
 
     /* Admin get a candidates list */
     public function adminCandidatesList(Request $request)
@@ -492,6 +494,7 @@ class CandidateController extends Controller
 
     public function guestCandidatescheck(Request $request)
     {
+  
         try {
             if (respValid($request)) {
                 return respValid($request);
@@ -499,23 +502,15 @@ class CandidateController extends Controller
             $request = decryptData($request['response']); /* Dectrypt  **/
 
             $request = (object) $request;
-
-            $gmst = GuestMater::where("email", auth()->user()->email)->withTrashed()->first();
-            if (empty($gmst)) {
-                $gmst = new GuestMater();
-                $gmst->uuid = Str::uuid()->toString();
-                $gmst->email = auth()->user()->email;
-                $gmst->save();
-            } 
-
-            $response = Candidate::where("uuid", $gmst->uuid)->first();
-            if (empty($response)) {
-                $response = (object) $response;
-                $response->uuid = $gmst->uuid;
-                $response->status = false;
-            } else {
-                $response->toArray();
-            }
+            // $gmst = GuestMater::where("email", auth()->user()->email)->withTrashed()->first();
+            // if (empty($gmst)) {
+            //     $gmst = new GuestMater();
+            //     $gmst->uuid = Str::uuid()->toString();
+            //     $gmst->email = auth()->user()->email;
+            //     $gmst->save();
+            // } 
+            $email = Auth::User()->email;
+            $response = Candidate::where("email",$email)->first();
             return sendDataHelper("List", $response, ok());
         } catch (\Throwable $th) {
             $bug = $th->getMessage();

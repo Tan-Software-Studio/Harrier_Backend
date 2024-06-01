@@ -66,10 +66,11 @@ class EmployerController extends Controller
                             'cand_name' => $cand->first_name.' '.$cand->last_name,
                             'job_name' => $job->job_title,
                             'emp_email' => $emp->email,
+                            'emp_name' => $emp->name,
                             'user_name' => $user->name,
                         ];
                         $data = (object) $data;
-
+                        // dd($data);
                                                 
                         $admin['email'] = env('CV_REQUEST_RECIEVE_MAIL');
                         $admin->notify(new CVRequested($data));

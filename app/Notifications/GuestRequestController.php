@@ -68,7 +68,6 @@ class GuestRequestController extends Controller
                     $in = new User;
                     $in->email = @$request['email'];
                     $in->role = $role;
-                
                     if(@$request['name'])
                     {
                         $in->name = @$request['name'];    
@@ -200,7 +199,6 @@ class GuestRequestController extends Controller
                
                 
                 $in = new User;
-                $in->name = @$request->name;
                 $in->email = @$request->email;
                 $in->role = roleEmp();
                 $in->is_request = inactive();
@@ -234,8 +232,9 @@ class GuestRequestController extends Controller
                     
                     $emp->save(); 
                     $email = @$request->email;
+                    $name =@$request->name;
                     $emp->notify(new EmpolerWelcomeEmailNotification($email)); 
-                    $emp->notify(new EmpolerWelcomeEmailNotificationToCS($email)); 
+                    $emp->notify(new EmpolerWelcomeEmailNotificationToCS($name)); 
                 }
 
                 // if(auth()->check() && !canADMIN())
